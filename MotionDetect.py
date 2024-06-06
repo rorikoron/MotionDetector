@@ -59,11 +59,17 @@ while True:
         
         # Save the frame as an image
         cv2.imwrite(image_path, frame)
-        send_email(image_path)
-        face_analysis = DeepFace.analyze(img_path = image_path)
-        print(face_analysis)
+        #send_email(image_path)
+        try:
 
-        cv2.waitKey(wait_sec)
+            face_analysis = DeepFace.analyze(img_path = image_path, actions=['emotion'])
+            print(face_analysis)
+            current_emotion = face_analysis[0]['dominant_emotion']
+            if(current_emotion == 'fear' or current_emotion == 'angry'):
+                send_email(image_path)
+        except:
+            print("error occur")
+
 
     cv2.waitKey(1)
 
