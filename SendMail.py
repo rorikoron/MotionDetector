@@ -7,6 +7,9 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
+#from linebot import LineBotApi, WebhookHandler
+#from linebot.exceptions import InvalidSignatureError
+#from linebot.models import MessageEvent, TextMessage, TextSendMessage
 def send_email(image_path):
     # read address in env file
     fromaddr = os.getenv('FROMADDR')
@@ -17,7 +20,7 @@ def send_email(image_path):
     msg['To'] = toaddr
     msg['Subject'] = "Motion Detected!"
 
-    body = "Motion has been detected. See the attached image."
+    body = "Someone feel sad fear or angry.See the attached image."
     msg.attach(MIMEText(body, 'plain'))
     attachment = open(image_path, "rb")
     part = MIMEBase('application', 'octet-stream')
@@ -36,4 +39,5 @@ def send_email(image_path):
 
     print("motion detected!")
 
-    
+def send_line():
+    pass
